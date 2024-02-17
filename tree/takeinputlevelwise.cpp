@@ -80,13 +80,24 @@ return root;
 
 }
 
-int countnode(Trees<int>* root){
+int countnode(Trees<int>* root){  //counting nodes
     if(root == NULL) return 0;
     int ans=1;
     for(int i =0;i<root->children.size();i++){
         ans+=countnode(root->children[i]);
     }
     return ans;
+}
+
+int height(Trees<int>* root){
+    int mx=0;
+    for(int i=0;i<root->children.size();i++){
+        int secoundMX = height(root->children[i]);
+        if(secoundMX>mx){
+            mx=secoundMX;
+        }
+    }
+    return mx+1;
 }
 
 
@@ -97,8 +108,8 @@ int main(){
     cout<<endl;
     cout<<endl;
     cout<<endl;
-    cout << countnode(root);
-
+    cout << countnode(root)<<endl;
+    cout << height(root);
 
     return 0;
 }
