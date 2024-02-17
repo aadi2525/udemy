@@ -27,6 +27,27 @@ void pprint(Trees<int>* root){
 
 }
 
+void P_L_wise(Trees<int>* root){
+   queue<Trees<int>*> q;
+   q.push(root);
+  
+   while(!q.empty()){
+     Trees<int>* f = q.front();
+   q.pop();
+
+   cout<<f->data<<" : " ;
+   
+    for(int i =0;i<f->children.size();i++){
+        cout<<f->children[i]->data<< " ,";
+    }
+    cout<<endl;
+    for(int i=0;i<f->children.size();i++){
+        q.push(f->children[i]);
+    }
+   }
+
+}
+
 Trees<int>* levelInpput(){
     int rootdata;
     cout<<"enter a rootdaata"<<endl;
@@ -63,7 +84,7 @@ return root;
 int main(){
 
     Trees<int>* root = levelInpput();
-    pprint(root);
+    P_L_wise(root);
 
     return 0;
 }
