@@ -36,7 +36,7 @@ void P_L_wise(Trees<int>* root){
    q.pop();
 
    cout<<f->data<<" : " ;
-   
+
     for(int i =0;i<f->children.size();i++){
         cout<<f->children[i]->data<< " ,";
     }
@@ -80,11 +80,25 @@ return root;
 
 }
 
+int countnode(Trees<int>* root){
+    if(root == NULL) return 0;
+    int ans=1;
+    for(int i =0;i<root->children.size();i++){
+        ans+=countnode(root->children[i]);
+    }
+    return ans;
+}
+
 
 int main(){
 
     Trees<int>* root = levelInpput();
-    P_L_wise(root);
+    // P_L_wise(root);
+    cout<<endl;
+    cout<<endl;
+    cout<<endl;
+    cout << countnode(root);
+
 
     return 0;
 }
