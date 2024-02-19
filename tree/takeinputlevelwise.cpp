@@ -90,26 +90,71 @@ int countnode(Trees<int>* root){  //counting nodes
 }
 
 int height(Trees<int>* root){
+    if(root == 0) return 0;
     int mx=0;
     for(int i=0;i<root->children.size();i++){
-        int secoundMX = height(root->children[i]);
-        if(secoundMX>mx){
-            mx=secoundMX;
-        }
+        // int secoundMX = height(root->children[i]);
+        // if(secoundMX>mx){
+        //     mx=secoundMX;
+        // }
+
+        //recurtion
+        mx=max(mx,height(root->children[i]));
     }
     return mx+1;
 }
 
+void PrintKlevel(Trees<int>* root ,int k){
+if(root == NULL){
+    return ;
+}
+if(k == 0){
+    cout<< root->data << endl;
+}
+for(int i =0;i<root->children.size();i++){
+    PrintKlevel(root->children[i],k-1);
+}
+
+}
+
+int countleaf(Trees<int>* root){
+    int ans=0;
+    if(root->children.size() == 0){
+        return 1;
+    }
+    for(int i =0;i<root->children.size();i++){
+        ans += countleaf(root->children[i]);
+    }
+    return ans;
+}
+
+void current_depth(Trees<int>* root ,int k , int c=0){
+    if(root == NULL){
+        return ;
+    }
+
+    if(k==c){
+        cout<<root->data<<" "<<endl;
+    }
+
+    for(int i=0;i<root->children.size();i++){
+        current_depth(root->children[i],k,c+1);
+    }
+}
 
 int main(){
 
     Trees<int>* root = levelInpput();
     // P_L_wise(root);
     cout<<endl;
-    cout<<endl;
-    cout<<endl;
     cout << countnode(root)<<endl;
+    cout<<endl;
     cout << height(root);
-
+    cout<<endl;
+    PrintKlevel(root,3);
+    cout<<endl;
+    cout<<countleaf(root)<<"hi"<<endl;
+cout<<endl;
+current_depth(root,2);
     return 0;
 }
