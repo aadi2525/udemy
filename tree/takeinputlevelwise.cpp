@@ -142,6 +142,34 @@ void current_depth(Trees<int>* root ,int k , int c=0){
     }
 }
 
+void pre_order(Trees<int>* root){
+    if(root == NULL)
+    {return;}
+    cout<<root->data<<" "<<endl;
+    for(int i=0;i<root->children.size();i++){
+        pre_order(root->children[i]);
+    }
+
+}
+
+void post_order(Trees<int>* root){
+    if(root == NULL)
+    {return;}
+    for(int i=0;i<root->children.size();i++){
+        pre_order(root->children[i]);
+    }
+    cout<<root->data<<" "<<endl;
+}
+
+void delete_tree(Trees<int>* root){
+    if(root == NULL)
+    {return;}
+    for(int i=0;i<root->children.size();i++){
+        pre_order(root->children[i]);
+    }
+    delete root;
+}
+
 int main(){
 
     Trees<int>* root = levelInpput();
@@ -156,5 +184,11 @@ int main(){
     cout<<countleaf(root)<<"hi"<<endl;
 cout<<endl;
 current_depth(root,2);
+cout<<endl;
+pre_order(root);
+cout<<endl;
+post_order(root);
+cout<<endl;
+delete_tree(root);
     return 0;
 }
