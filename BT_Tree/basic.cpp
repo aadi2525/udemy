@@ -41,13 +41,31 @@ if(root == NULL){
 
 }
 
-int main(){
-    BTTree<int>* root = new BTTree<int>(100);
-    BTTree<int>* n1 = new BTTree<int>(200);
-    BTTree<int>* n2 = new BTTree<int>(300);
+BTTree<int>* takeinput(){
+    int rootdata;
+    cout<<"enter data"<<endl;
+    cin>>rootdata;
+    if(rootdata==-1){
+        return NULL;
+    }
+    BTTree<int>* root = new BTTree<int>(rootdata);
+    BTTree<int>* leftChild = takeinput();
+    BTTree<int>* rightChild= takeinput();
 
-root->left = n1;
-root->right = n2;
+    root->left = leftChild;
+    root->right = rightChild;
+
+    return root;
+}
+
+int main(){
+    BTTree<int>* root = takeinput();
+    // BTTree<int>* root = new BTTree<int>(100);
+//     BTTree<int>* n1 = new BTTree<int>(200);
+//     BTTree<int>* n2 = new BTTree<int>(300);
+
+// root->left = n1;
+// root->right = n2;
 
 print_BT(root);
 
